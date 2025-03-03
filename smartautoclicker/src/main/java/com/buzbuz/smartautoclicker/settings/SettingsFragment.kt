@@ -81,16 +81,6 @@ class SettingsFragment : Fragment() {
             setOnClickListener(viewModel::toggleInputBlockWorkaround)
         }
 
-        viewBinding.fieldPrivacySettings.apply {
-            setTitle(requireContext().getString(R.string.field_privacy))
-            setOnClickListener { viewModel.showPrivacySettings(requireActivity()) }
-        }
-
-        viewBinding.fieldRemoveAds.apply {
-            setTitle(requireContext().getString(R.string.field_remove_ads))
-            setOnClickListener { viewModel.showPurchaseActivity(requireActivity()) }
-        }
-
         viewBinding.fieldTroubleshooting.apply {
             setTitle(requireContext().getString(R.string.field_troubleshooting))
             setOnClickListener { viewModel.showTroubleshootingDialog(requireActivity()) }
@@ -105,8 +95,6 @@ class SettingsFragment : Fragment() {
                 launch { viewModel.isInputWorkaroundEnabled.collect(viewBinding.fieldInputBlockWorkaround::setChecked) }
                 launch { viewModel.shouldShowInputBlockWorkaround.collect(::updateInputBlockWorkaroundVisibility) }
                 launch { viewModel.shouldShowEntireScreenCapture.collect(::updateForceEntireScreenVisibility) }
-                launch { viewModel.shouldShowPrivacySettings.collect(::updatePrivacySettingsVisibility) }
-                launch { viewModel.shouldShowPurchase.collect(::updateRemoveAdsVisibility) }
             }
         }
     }

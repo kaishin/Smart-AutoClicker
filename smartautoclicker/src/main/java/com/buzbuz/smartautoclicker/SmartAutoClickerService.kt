@@ -45,7 +45,6 @@ import com.buzbuz.smartautoclicker.feature.notifications.common.NotificationIds
 import com.buzbuz.smartautoclicker.feature.notifications.user.UserNotificationsController
 import com.buzbuz.smartautoclicker.feature.qstile.domain.QSTileActionHandler
 import com.buzbuz.smartautoclicker.feature.qstile.domain.QSTileRepository
-import com.buzbuz.smartautoclicker.feature.revenue.IRevenueRepository
 import com.buzbuz.smartautoclicker.feature.review.ReviewRepository
 import com.buzbuz.smartautoclicker.feature.smart.debugging.domain.DebuggingRepository
 import com.buzbuz.smartautoclicker.localservice.LocalService
@@ -86,7 +85,6 @@ class SmartAutoClickerService : AccessibilityService(), SmartActionExecutor {
     @Inject lateinit var qualityRepository: QualityRepository
     @Inject lateinit var qualityMetricsMonitor: QualityMetricsMonitor
     @Inject lateinit var settingsRepository: SettingsRepository
-    @Inject lateinit var revenueRepository: IRevenueRepository
     @Inject lateinit var tileRepository: QSTileRepository
     @Inject lateinit var debugRepository: DebuggingRepository
     @Inject lateinit var userNotificationsController: UserNotificationsController
@@ -124,7 +122,6 @@ class SmartAutoClickerService : AccessibilityService(), SmartActionExecutor {
                 detectionRepository = detectionRepository,
                 dumbEngine = dumbEngine,
                 debugRepository = debugRepository,
-                revenueRepository = revenueRepository,
                 settingsRepository = settingsRepository,
                 androidExecutor = this,
                 onStart = ::onLocalServiceStarted,
@@ -222,7 +219,6 @@ class SmartAutoClickerService : AccessibilityService(), SmartActionExecutor {
         serviceActionExecutor?.dump(writer)
         qualityRepository.dump(writer)
 
-        revenueRepository.dump(writer)
         reviewRepository.dump(writer)
     }
 

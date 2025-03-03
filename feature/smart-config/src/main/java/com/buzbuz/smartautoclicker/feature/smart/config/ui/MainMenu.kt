@@ -108,12 +108,6 @@ class MainMenu(private val onStopClicked: () -> Unit) : OverlayMenu() {
         setOverlayViewVisibility(false)
 
         lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.CREATED) {
-                launch { viewModel.paywallIsVisible.collect(::updateVisibilityForPaywall) }
-            }
-        }
-
-        lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch { viewModel.isStartButtonEnabled.collect(::updatePlayPauseButtonEnabledState) }
                 launch { viewModel.isMediaProjectionStarted.collect(::updateProjectionErrorBadge) }
@@ -131,9 +125,6 @@ class MainMenu(private val onStopClicked: () -> Unit) : OverlayMenu() {
             playMenuButton = viewBinding.btnPlay,
             configMenuButton = viewBinding.btnClickList,
         )
-
-        // Start loading advertisement if needed
-        viewModel.loadAdIfNeeded(context)
     }
 
     override fun onStop() {
